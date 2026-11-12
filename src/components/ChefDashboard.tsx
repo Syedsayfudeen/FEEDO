@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useEcosystem } from '../context/EcosystemContext.tsx';
 import { Order, OrderStatus } from '../../shared/types.ts';
+import { CHEF_IMAGE } from '../theme.ts';
 
 export const ChefDashboard: React.FC = () => {
   const {
@@ -357,10 +358,13 @@ export const ChefDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal-950 text-ivory-50 py-8 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-charcoal-950 px-4 py-6 text-ivory-50 sm:px-6 lg:py-8">
+      <div className="mx-auto max-w-[1400px] space-y-6">
         {/* Common Kitchen Login Header */}
-        <div className="rounded-3xl bg-gradient-to-r from-emerald-950 via-charcoal-900 to-emerald-950 border border-emerald-800 p-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl border border-gold-400/30 bg-charcoal-950 p-6 shadow-2xl sm:p-8">
+          <img src={CHEF_IMAGE} alt="Chef preparing a dish" className="absolute inset-y-0 right-0 hidden h-full w-2/5 object-cover opacity-35 lg:block" />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-950 via-charcoal-950/95 to-charcoal-950/30" />
+          <div className="relative flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
           <div className="space-y-1.5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-900/90 border border-emerald-700 text-xs font-mono text-gold-300">
               <ChefHat className="w-4 h-4" />
@@ -395,6 +399,17 @@ export const ChefDashboard: React.FC = () => {
               <span>Report Ingredient Shortage</span>
             </button>
           </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {[['New Orders', newOrders.length, 'text-gold-300'], ['Preparing', preparingOrders.length, 'text-orange-300'], ['Ready', readyOrders.length, 'text-emerald-300'], ['Completed', completedOrders.length, 'text-ivory-50']].map(([label, value, tone]) => (
+            <div key={String(label)} className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-inner">
+              <div className="text-[11px] uppercase tracking-wider text-ivory-300">{label}</div>
+              <div className={`mt-1 font-display text-2xl font-extrabold ${tone}`}>{value}</div>
+              <div className="mt-1 text-[10px] text-ivory-300/70">Live KDS status</div>
+            </div>
+          ))}
         </div>
 
         {/* Intelligent Order Batching Banner */}

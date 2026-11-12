@@ -64,7 +64,7 @@ const MainShell: React.FC = () => {
       )}
 
       {/* Active Role View */}
-      <main className="flex-1 pb-28">
+      <main className="flex-1 pb-16">
         {activeView === 'landing' && <LandingPage />}
         {activeView === 'customer' && <CustomerDashboard />}
         {activeView === 'chef' && <ChefDashboard />}

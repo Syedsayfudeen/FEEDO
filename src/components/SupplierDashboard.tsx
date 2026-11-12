@@ -10,6 +10,7 @@ import {
   Save,
 } from 'lucide-react';
 import { useEcosystem } from '../context/EcosystemContext.tsx';
+import { SUPPLY_IMAGE } from '../theme.ts';
 
 export const SupplierDashboard: React.FC = () => {
   const { snapshot, currentUser, apiFetch, showToast } = useEcosystem();
@@ -95,9 +96,12 @@ export const SupplierDashboard: React.FC = () => {
     .reduce((sum, r) => sum + r.totalEstimate, 0);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="mx-auto max-w-[1400px] space-y-6 px-4 py-6 sm:px-6 lg:py-8">
       {/* Supplier Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-950 via-emerald-900 to-charcoal-950 text-ivory-50 p-6 sm:p-8 shadow-xl border border-emerald-800 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div
+        className="relative overflow-hidden rounded-3xl border border-gold-400/35 bg-charcoal-950 bg-cover bg-center p-6 text-ivory-50 shadow-premium sm:p-8"
+        style={{ backgroundImage: `linear-gradient(90deg, rgba(11,20,40,0.98) 0%, rgba(11,20,40,0.88) 48%, rgba(11,20,40,0.42) 100%), url(${SUPPLY_IMAGE})` }}
+      >
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-xs text-gold-300 font-mono">
             <Truck className="w-3.5 h-3.5" />
@@ -145,7 +149,7 @@ export const SupplierDashboard: React.FC = () => {
       </div>
 
       {/* Two-Step Inventory Integrity Banner */}
-      <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-xs text-emerald-950">
+      <div className="flex items-center gap-3 rounded-2xl border border-gold-400/30 bg-gold-300/20 p-4 text-xs text-charcoal-900">
         <ShieldAlert className="w-5 h-5 text-emerald-800 shrink-0" />
         <div>
           <strong>Closed-Loop Verification Protocol:</strong> Accepting, processing, or dispatching
@@ -155,7 +159,7 @@ export const SupplierDashboard: React.FC = () => {
       </div>
 
       {/* Incoming Replenishment Requests & 5-Stage Dispatch Controls */}
-      <div className="rounded-3xl bg-white border border-emerald-900/10 p-6 shadow-premium space-y-5">
+      <div className="rounded-3xl border border-charcoal-900/10 bg-white p-6 shadow-premium space-y-5">
         <h2 className="font-display font-extrabold text-xl text-charcoal-900">
           Incoming Replenishment Requests & 5-Stage Supply Chain Pipeline
         </h2>

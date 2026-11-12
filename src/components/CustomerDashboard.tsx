@@ -26,6 +26,7 @@ import {
 import { useEcosystem, handleFoodImageError } from '../context/EcosystemContext.tsx';
 import { FoodCategory, Order } from '../../shared/types.ts';
 import { CustomerAIChatWidget } from './CustomerAIChatWidget.tsx';
+import { DINING_IMAGE, TAKEAWAY_IMAGE } from '../theme.ts';
 
 export const CustomerDashboard: React.FC = () => {
   const {
@@ -252,9 +253,12 @@ export const CustomerDashboard: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+    <div className="mx-auto max-w-[1400px] space-y-6 px-4 py-6 sm:px-6 lg:py-8">
       {/* Top Customer Banner */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-950 via-emerald-900 to-charcoal-900 text-ivory-50 p-6 sm:p-8 shadow-xl border border-emerald-800 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div
+        className="relative overflow-hidden rounded-3xl border border-gold-400/35 bg-charcoal-950 bg-cover bg-center p-6 text-ivory-50 shadow-premium sm:p-8"
+        style={{ backgroundImage: `linear-gradient(90deg, rgba(11,20,40,0.98) 0%, rgba(11,20,40,0.88) 48%, rgba(11,20,40,0.48) 100%), url(${DINING_IMAGE})` }}
+      >
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-xs text-emerald-200 font-medium">
             <Sparkles className="w-3.5 h-3.5 text-gold-400" />
@@ -317,11 +321,12 @@ export const CustomerDashboard: React.FC = () => {
             if (!selectedTable) setSelectedTable(5);
           }}
           data-testid="select-dine-in-card"
-          className={`cursor-pointer p-5 rounded-2xl border-2 transition-all flex items-center justify-between gap-4 ${
+          className={`relative min-h-[154px] cursor-pointer overflow-hidden rounded-2xl border-2 bg-cover bg-center p-5 transition-all ${
             orderType === 'DINE_IN'
-              ? 'bg-emerald-50/90 border-emerald-800 shadow-md'
-              : 'bg-white border-stone-200 hover:border-emerald-400'
+              ? 'border-gold-500 shadow-md'
+              : 'border-stone-200 hover:border-gold-400'
           }`}
+          style={{ backgroundImage: `linear-gradient(90deg, rgba(255,249,239,0.98) 0%, rgba(255,249,239,0.92) 52%, rgba(255,249,239,0.18) 100%), url(${DINING_IMAGE})` }}
         >
           <div className="flex items-start gap-3.5">
             <div
@@ -373,11 +378,12 @@ export const CustomerDashboard: React.FC = () => {
         <div
           onClick={() => setOrderType('TAKEAWAY')}
           data-testid="select-takeaway-card"
-          className={`cursor-pointer p-5 rounded-2xl border-2 transition-all flex items-center justify-between gap-4 ${
+          className={`relative min-h-[154px] cursor-pointer overflow-hidden rounded-2xl border-2 bg-cover bg-center p-5 transition-all ${
             orderType === 'TAKEAWAY'
-              ? 'bg-emerald-50/90 border-emerald-800 shadow-md'
-              : 'bg-white border-stone-200 hover:border-emerald-400'
+              ? 'border-gold-500 shadow-md'
+              : 'border-stone-200 hover:border-gold-400'
           }`}
+          style={{ backgroundImage: `linear-gradient(90deg, rgba(255,249,239,0.98) 0%, rgba(255,249,239,0.92) 52%, rgba(255,249,239,0.18) 100%), url(${TAKEAWAY_IMAGE})` }}
         >
           <div className="flex items-start gap-3.5">
             <div
@@ -547,7 +553,7 @@ export const CustomerDashboard: React.FC = () => {
             </div>
 
             {/* Menu Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {filteredMenu.map((item) => {
                 const isAvailable = item.isAvailable !== false;
                 const inCart = cart.find((c) => c.menuItem.id === item.id);
